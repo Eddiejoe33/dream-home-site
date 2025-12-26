@@ -20,47 +20,28 @@
 
 <section class="properties">
   <h2>Available Properties</h2>
-
-  <div class="property-list">
-
-    <!-- Property 1 -->
-    <div class="property-card">
-      <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c" alt="Modern Apartment">
-      <h3>Modern 3 Bedroom Apartment</h3>
-      <p>Lekki, Lagos</p>
-      <p><strong>₦45,000,000</strong></p>
-      <a href="contact.html" class="btn">Contact Agent</a>
-    </div>
-
-    <!-- Property 2 -->
-    <div class="property-card">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Luxury Duplex">
-      <h3>Luxury Duplex</h3>
-      <p>Victoria Island, Lagos</p>
-      <p><strong>₦120,000,000</strong></p>
-      <a href="contact.html" class="btn">Contact Agent</a>
-    </div>
-
-    <!-- Property 3 -->
-    <div class="property-card">
-      <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4" alt="Family Home">
-      <h3>4 Bedroom Family Home</h3>
-      <p>Ibadan, Oyo State</p>
-      <p><strong>₦38,000,000</strong></p>
-      <a href="contact.html" class="btn">Contact Agent</a>
-    </div>
-
-    <!-- Property 4 -->
-    <div class="property-card">
-      <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c" alt="Land for Sale">
-      <h3>Land for Sale</h3>
-      <p>Abeokuta, Ogun State</p>
-      <p><strong>₦15,000,000</strong></p>
-      <a href="contact.html" class="btn">Contact Agent</a>
-    </div>
-
-  </div>
+  <div class="property-list" id="property-list"></div>
 </section>
+
+<script>
+  fetch('properties.json')
+    .then(res => res.json())
+    .then(properties => {
+      const list = document.getElementById('property-list');
+      properties.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'property-card';
+        card.innerHTML = `
+          <img src="${p.image}" alt="${p.title}">
+          <h3>${p.title}</h3>
+          <p>${p.location}</p>
+          <p>${p.price}</p>
+          <a href="contact.html" class="btn">Contact Agent</a>
+        `;
+        list.appendChild(card);
+      });
+    });
+</script>
 
 <footer class="footer">
   <p>&copy; 2025 Dream Homes Real Estate. All Rights Reserved.</p>
