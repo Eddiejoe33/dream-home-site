@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Dream Homes Real Estate</title>
   <link rel="stylesheet" href="styles.css">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+e2b0zj9kZw5+4ONkCtm6q+AXfWjXnxv+okjFz+3A=" crossorigin=""/>
+  <style>
+    #map {
+      height: 350px;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -29,18 +40,9 @@
     <button type="submit" class="btn">Send Message</button>
   </form>
 
-  <!-- Google Map -->
-  <div style="margin-top: 3rem;">
-    <h3>Our Office Location</h3>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1985.8452173375535!2d3.379205515861192!3d6.524379993556565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf2b9a0c3d0a7%3A0x3e4b6f7c5b9e8d43!2sVictoria%20Island%2C%20Lagos!5e0!3m2!1sen!2sng!4v1710000000000"
-      width="100%"
-      height="350"
-      style="border:0; border-radius:10px;"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+  <div>
+    <h3>Our Office Location & Nearby Properties</h3>
+    <div id="map"></div>
   </div>
 </section>
 
@@ -48,5 +50,37 @@
   <p>&copy; 2025 Dream Homes Real Estate. All Rights Reserved.</p>
 </footer>
 
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-o9N1j6U5y1pFnvP5F68gu03I1HSc5s+ST5C+zMJtHko=" crossorigin=""></script>
+
+<script>
+  // Initialize map
+  var map = L.map('map').setView([6.5244, 3.3792], 13); // Lagos Island coordinates
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+  }).addTo(map);
+
+  // Add office marker
+  L.marker([6.5244, 3.3792]).addTo(map)
+    .bindPopup('<b>Dream Homes Office</b><br>Victoria Island, Lagos')
+    .openPopup();
+
+  // Add fake property markers
+  var properties = [
+    {lat: 6.5260, lng: 3.3800, name: "Luxury Apartment"},
+    {lat: 6.5225, lng: 3.3765, name: "3 Bedroom Duplex"},
+    {lat: 6.5250, lng: 3.3830, name: "Land for Sale"},
+    {lat: 6.5270, lng: 3.3780, name: "Studio Flat"}
+  ];
+
+  properties.forEach(function(p) {
+    L.marker([p.lat, p.lng]).addTo(map)
+      .bindPopup('<b>' + p.name + '</b>');
+  });
+</script>
+
 </body>
-</html>
+      </html>
