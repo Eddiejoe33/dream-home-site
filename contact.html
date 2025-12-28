@@ -4,18 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | Dream Homes Real Estate</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* === MAP STABILITY === */
     .map-container {
       width: 100%;
       height: 400px;
       min-height: 400px;
       max-height: 500px;
       border-radius: 10px;
-      position: relative;
-      overflow: hidden;
       margin-top: 20px;
+      overflow: hidden;
     }
 
     /* Optional: form styling */
@@ -79,45 +81,43 @@
   </div>
 </section>
 
-<!-- === STABLE INTERACTIVE MAP SCRIPT === -->
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-  function initMap() {
-    const mapElement = document.getElementById('map');
-    if (!mapElement) return;
+  // Initialize map centered in Lagos
+  const map = L.map('map').setView([6.5244, 3.3792], 6);
 
-    const map = new google.maps.Map(mapElement, {
-      zoom: 6,
-      center: { lat: 6.5244, lng: 3.3792 } // Lagos, Nigeria
-    });
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+  }).addTo(map);
 
-    // Fetch properties and add markers
-    fetch('properties.json')
-      .then(res => res.json())
-      .then(properties => {
-        properties.forEach(p => {
-          if (p.lat && p.lng) {
-            new google.maps.Marker({
-              position: { lat: p.lat, lng: p.lng },
-              map: map,
-              title: p.title || 'Property'
-            });
-          }
-        });
-      })
-      .catch(err => console.error('Error loading properties:', err));
-  }
+  // Sample properties array (replace with fetch('properties.json') if you have a JSON file)
+  const properties = [
+    { lat: 6.5244, lng: 3.3792, title: "Property 1" },
+    { lat: 9.0820, lng: 8.6753, title: "Property 2" },
+    { lat: 5.6037, lng: 0.1870, title: "Property 3" }
+  ];
 
-  // Wait until page fully loads before initializing map
-  window.addEventListener('load', () => {
-    if (typeof google !== 'undefined') {
-      setTimeout(initMap, 500); // delay ensures container is ready
-    }
+  // Add markers
+  properties.forEach(p => {
+    L.marker([p.lat, p.lng]).addTo(map)
+      .bindPopup(p.title);
   });
-</script>
 
-<!-- Google Maps API: replace YOUR_API_KEY with a valid key -->
-<script async
-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY">
+  // Optional: if you have properties.json
+  /*
+  fetch('properties.json')
+    .then(res => res.json())
+    .then(properties => {
+      properties.forEach(p => {
+        if (p.lat && p.lng) {
+          L.marker([p.lat, p.lng]).addTo(map)
+            .bindPopup(p.title || "Property");
+        }
+      });
+    });
+  */
 </script>
 
 <footer class="footer">
