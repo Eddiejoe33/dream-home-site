@@ -6,7 +6,7 @@
   <title>Contact | Dream Homes Real Estate</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* === MAP CONTAINER STYLING === */
+    /* === MAP STABILITY === */
     .map-container {
       width: 100%;
       height: 400px;
@@ -15,17 +15,7 @@
       border-radius: 10px;
       position: relative;
       overflow: hidden;
-      background-color: #f0f0f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .map-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10px;
+      margin-top: 20px;
     }
 
     /* Optional: form styling */
@@ -80,20 +70,58 @@
     <button type="submit" class="btn">Send Message</button>
   </form>
 
-  <div style="margin-top:3rem;">
+  <div>
     <h3>Our Properties on Map</h3>
     <p style="opacity:0.7;font-size:14px;">
-      Interactive map showing property locations across Nigeria (demo version).
+      Interactive map showing property locations across Nigeria.
     </p>
-    <div class="map-container">
-      <img src="static-map.png" alt="Demo map showing property locations">
-    </div>
+    <div id="map" class="map-container"></div>
   </div>
 </section>
+
+<!-- === STABLE INTERACTIVE MAP SCRIPT === -->
+<script>
+  function initMap() {
+    const mapElement = document.getElementById('map');
+    if (!mapElement) return;
+
+    const map = new google.maps.Map(mapElement, {
+      zoom: 6,
+      center: { lat: 6.5244, lng: 3.3792 } // Lagos, Nigeria
+    });
+
+    // Fetch properties and add markers
+    fetch('properties.json')
+      .then(res => res.json())
+      .then(properties => {
+        properties.forEach(p => {
+          if (p.lat && p.lng) {
+            new google.maps.Marker({
+              position: { lat: p.lat, lng: p.lng },
+              map: map,
+              title: p.title || 'Property'
+            });
+          }
+        });
+      })
+      .catch(err => console.error('Error loading properties:', err));
+  }
+
+  // Wait until page fully loads before initializing map
+  window.addEventListener('load', () => {
+    if (typeof google !== 'undefined') {
+      setTimeout(initMap, 500); // delay ensures container is ready
+    }
+  });
+</script>
+
+<!-- Google Maps API: replace YOUR_API_KEY with a valid key -->
+<script async
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY">
+</script>
 
 <footer class="footer">
   <p>&copy; 2025 Dream Homes Real Estate. All Rights Reserved.</p>
 </footer>
 
-</body>
-</html>
+</
