@@ -7,13 +7,44 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     /* === MAP STABILITY FIX === */
-    #map {
+    .map-container {
       width: 100%;
       height: 400px;
       min-height: 400px;
+      max-height: 500px;
+      border-radius: 10px;
       position: relative;
       overflow: hidden;
-      border-radius: 10px;
+    }
+
+    /* Optional: small polish for form spacing */
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .contact form input,
+    .contact form textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .contact form button.btn {
+      padding: 12px;
+      background-color: #4da3ff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .contact form button.btn:hover {
+      background-color: #357ad3;
     }
   </style>
 </head>
@@ -43,19 +74,13 @@
     <p style="opacity:0.7;font-size:14px;">
       Interactive map showing property locations across Nigeria.
     </p>
-    <div id="map"></div>
+    <div id="map" class="map-container"></div>
   </div>
-
 </section>
 
-<!-- === SAFE MAP SCRIPT === -->
+<!-- === STABLE MAP SCRIPT === -->
 <script>
-  let mapInitialized = false;
-
   function initMap() {
-    if (mapInitialized) return;
-    mapInitialized = true;
-
     const mapElement = document.getElementById('map');
     if (!mapElement) return;
 
@@ -80,15 +105,16 @@
       .catch(err => console.error('Properties load error:', err));
   }
 
+  // Initialize map after page fully loads to prevent disappearing
   window.addEventListener('load', () => {
-    if (typeof google !== "undefined") {
-      setTimeout(initMap, 300);
+    if (typeof google !== 'undefined') {
+      setTimeout(initMap, 500); // half-second delay ensures container is ready
     }
   });
 </script>
 
 <script async
-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY">
 </script>
 
 <footer class="footer">
