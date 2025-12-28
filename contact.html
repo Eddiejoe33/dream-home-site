@@ -6,7 +6,7 @@
   <title>Contact | Dream Homes Real Estate</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* === MAP STABILITY FIX === */
+    /* === MAP CONTAINER STYLING === */
     .map-container {
       width: 100%;
       height: 400px;
@@ -15,9 +15,20 @@
       border-radius: 10px;
       position: relative;
       overflow: hidden;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Optional: small polish for form spacing */
+    .map-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* Optional: form styling */
     .contact form {
       display: flex;
       flex-direction: column;
@@ -72,54 +83,17 @@
   <div style="margin-top:3rem;">
     <h3>Our Properties on Map</h3>
     <p style="opacity:0.7;font-size:14px;">
-      Interactive map showing property locations across Nigeria.
+      Interactive map showing property locations across Nigeria (demo version).
     </p>
-    <div id="map" class="map-container"></div>
+    <div class="map-container">
+      <img src="static-map.png" alt="Demo map showing property locations">
+    </div>
   </div>
 </section>
-
-<!-- === STABLE MAP SCRIPT === -->
-<script>
-  function initMap() {
-    const mapElement = document.getElementById('map');
-    if (!mapElement) return;
-
-    const map = new google.maps.Map(mapElement, {
-      zoom: 6,
-      center: { lat: 6.5244, lng: 3.3792 }
-    });
-
-    fetch('properties.json')
-      .then(res => res.json())
-      .then(properties => {
-        properties.forEach(p => {
-          if (p.lat && p.lng) {
-            new google.maps.Marker({
-              position: { lat: p.lat, lng: p.lng },
-              map: map,
-              title: p.title || 'Property'
-            });
-          }
-        });
-      })
-      .catch(err => console.error('Properties load error:', err));
-  }
-
-  // Initialize map after page fully loads to prevent disappearing
-  window.addEventListener('load', () => {
-    if (typeof google !== 'undefined') {
-      setTimeout(initMap, 500); // half-second delay ensures container is ready
-    }
-  });
-</script>
-
-<script async
-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY">
-</script>
 
 <footer class="footer">
   <p>&copy; 2025 Dream Homes Real Estate. All Rights Reserved.</p>
 </footer>
 
 </body>
-  </html>
+</html>
