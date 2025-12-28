@@ -3,150 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dream Homes Real Estate</title>
+  <title>Dream Homes | Real Estate</title>
   <link rel="stylesheet" href="styles.css">
+
   <style>
-    /* === GENERAL STYLING === */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f6f8fb;
-    }
-
-    a {
-      text-decoration: none;
-      color: #4da3ff;
-    }
-
-    h1, h2, h3 {
-      margin: 0 0 12px 0;
-    }
-
-    header {
-      background-color: #4da3ff;
-      color: white;
-      padding: 20px;
-    }
-
-    header h1 {
-      display: inline-block;
-      margin-right: 30px;
-    }
-
-    nav a {
-      margin-right: 20px;
-      color: white;
-      font-weight: bold;
-    }
-
-    nav a.active {
-      text-decoration: underline;
-    }
-
-    /* HERO SECTION */
+    /* ===== HERO ===== */
     .hero {
+      background: linear-gradient(to right, #4da3ff, #2b6cb0);
+      color: white;
+      padding: 80px 20px;
       text-align: center;
-      padding: 60px 20px;
-      background: #e6f0ff;
     }
 
     .hero h2 {
-      font-size: 36px;
-      margin-bottom: 16px;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
     }
 
     .hero p {
-      font-size: 18px;
-      margin-bottom: 24px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
     }
 
-    .btn-primary {
-      background-color: #4da3ff;
-      color: white;
-      padding: 12px 28px;
+    .hero .btn {
+      background: white;
+      color: #2b6cb0;
+      padding: 12px 25px;
       border-radius: 6px;
       font-weight: bold;
-      cursor: pointer;
+      text-decoration: none;
     }
 
-    .btn-primary:hover {
-      background-color: #357ad3;
-    }
-
-    /* FEATURES / BADGES */
+    /* ===== FEATURES ===== */
     .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-      padding: 40px 20px;
-    }
-
-    .feature-card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-      width: 250px;
-      text-align: center;
-    }
-
-    .feature-card h3 {
-      color: #4da3ff;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      font-size: 14px;
-      color: #555;
-    }
-
-    /* TESTIMONIALS */
-    .testimonials {
-      padding: 40px 20px;
-      background: #e6f0ff;
-      text-align: center;
-    }
-
-    .testimonial-card {
-      background: white;
-      padding: 18px;
-      border-radius: 10px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-      margin: 12px auto;
-      max-width: 600px;
-    }
-
-    .testimonial-card p {
-      font-style: italic;
-    }
-
-    .testimonial-card strong {
-      display: block;
-      margin-top: 8px;
-      color: #333;
-    }
-
-    /* CTA SECTION */
-    .cta {
-      text-align: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
       padding: 60px 20px;
+      background: #f7f9fc;
     }
 
-    footer {
-      background-color: #333;
-      color: white;
+    .feature-box {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
       text-align: center;
-      padding: 20px;
+    }
+
+    .feature-box h3 {
+      color: #2b6cb0;
+      margin-bottom: 10px;
+    }
+
+    /* ===== WHY US ===== */
+    .why {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .why h2 {
+      margin-bottom: 40px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .why-box {
+      background: #f7f9fc;
+      padding: 25px;
+      border-radius: 10px;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background: #2b6cb0;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .testimonial {
+      max-width: 600px;
+      margin: 20px auto;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      padding: 60px 20px;
+      text-align: center;
+      background: #f7f9fc;
+    }
+
+    .cta a {
+      background: #2b6cb0;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-<header>
+<header class="header">
   <h1>Dream Homes</h1>
   <nav>
     <a href="index.html" class="active">Home</a>
@@ -156,61 +123,69 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h2>Find Your Dream Home Today</h2>
-  <p>Explore the best properties with trusted real estate agents.</p>
-  <a href="properties.html" class="btn-primary">View Listings</a>
+  <p>Explore verified properties across Nigeria with trusted real estate agents.</p>
+  <a href="properties.html" class="btn">View Listings</a>
 </section>
 
+<!-- FEATURES -->
 <section class="features">
-  <div class="feature-card">
+  <div class="feature-box">
     <h3>Verified Listings</h3>
     <p>All properties are carefully verified for your peace of mind.</p>
   </div>
-  <div class="feature-card">
+  <div class="feature-box">
     <h3>Trusted Agents</h3>
     <p>Work only with professional agents who value your time.</p>
   </div>
-  <div class="feature-card">
+  <div class="feature-box">
     <h3>24/7 Support</h3>
-    <p>We are available around the clock to help you find your home.</p>
+    <p>We are always available to guide you through every step.</p>
   </div>
 </section>
 
-<section class="features">
-  <div class="feature-card">
-    <h3>Professional Agents</h3>
-    <p>Work with experienced and trustworthy real estate agents.</p>
-  </div>
-  <div class="feature-card">
-    <h3>Verified Properties</h3>
-    <p>All listings are carefully checked for accuracy and quality.</p>
-  </div>
-  <div class="feature-card">
-    <h3>Easy & Transparent</h3>
-    <p>Buying or selling property has never been this simple.</p>
+<!-- WHY US -->
+<section class="why">
+  <h2>Why Choose Dream Homes?</h2>
+  <div class="why-grid">
+    <div class="why-box">
+      <h3>Professional Agents</h3>
+      <p>Experienced agents you can trust.</p>
+    </div>
+    <div class="why-box">
+      <h3>Verified Properties</h3>
+      <p>No fake listings. No stress.</p>
+    </div>
+    <div class="why-box">
+      <h3>Easy & Transparent</h3>
+      <p>Simple process from search to ownership.</p>
+    </div>
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
 <section class="testimonials">
   <h2>What Our Clients Say</h2>
-  <div class="testimonial-card">
-    <p>"Dream Homes helped me find my perfect apartment quickly and easily!"</p>
-    <strong>- Adebayo J.</strong>
-  </div>
-  <div class="testimonial-card">
-    <p>"Highly professional agents and verified listings. I highly recommend."</p>
-    <strong>- Chiamaka O.</strong>
-  </div>
+  <p class="testimonial">
+    “Dream Homes helped me find my perfect apartment quickly and easily.”  
+    <br>— Adebayo J.
+  </p>
+  <p class="testimonial">
+    “Highly professional agents and verified listings.”  
+    <br>— Chiamaka O.
+  </p>
 </section>
 
+<!-- CTA -->
 <section class="cta">
   <h2>Ready to Find Your Dream Home?</h2>
-  <a href="properties.html" class="btn-primary">View Listings</a>
+  <a href="contact.html">Contact Us Now</a>
 </section>
 
-<footer>
-  <p>© 2025 Dream Homes Real Estate. All Rights Reserved.</p>
+<footer class="footer">
+  <p>&copy; 2025 Dream Homes Real Estate. All Rights Reserved.</p>
 </footer>
 
 </body>
